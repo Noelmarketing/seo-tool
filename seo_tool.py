@@ -1,23 +1,25 @@
 import argparse
 from urllib.parse import urlparse
 
+__version__ = "1.0.0"
+
 import requests
 from bs4 import BeautifulSoup
 
 
 def fetch_html(url: str) -> str:
-    """Fetches HTML content from a URL."""
+    """Lädt den HTML-Inhalt einer URL herunter."""
     response = requests.get(url, timeout=10)
     response.raise_for_status()
     return response.text
 
 
 def parse_seo_metrics(html: str, base_url: str | None = None) -> dict:
-    """Parses SEO related metrics from an HTML document.
+    """Extrahiert SEO-Metriken aus einem HTML-Dokument.
 
     Args:
-        html: HTML content to analyze.
-        base_url: Optional base URL of the page, used to classify links.
+        html: Zu analysierender HTML-Inhalt.
+        base_url: Optionale Basis-URL der Seite, um Links als intern oder extern einzuordnen.
     """
     soup = BeautifulSoup(html, "html.parser")
 
@@ -72,27 +74,28 @@ def parse_seo_metrics(html: str, base_url: str | None = None) -> dict:
 
 
 def main() -> None:
-    parser = argparse.ArgumentParser(description="Simple SEO analyzer")
-    parser.add_argument("url", help="URL to analyze")
+    parser = argparse.ArgumentParser(description="Einfacher SEO-Analysator")
+    parser.add_argument("url", help="URL, die analysiert werden soll")
+    parser.add_argument("--version", action="version", version=__version__)
     args = parser.parse_args()
 
     html = fetch_html(args.url)
     metrics = parse_seo_metrics(html, base_url=args.url)
 
-    print(f"Title: {metrics['title']}")
-    print(f"Meta description: {metrics['meta_description']}")
-    print(f"Word count: {metrics['word_count']}")
-    print("Heading counts:")
+    print(f"Titel: {metrics['title']}")
+    print(f"Meta-Description: {metrics['meta_description']}")
+    print(f"Wörter insgesamt: {metrics['word_count']}")
+    print("Überschriftenanzahl:")
     for heading, count in metrics["heading_counts"].items():
         if count:
             print(f"  {heading}: {count}")
-    print(f"Images: {metrics['image_count']}")
-    print(f"Images with alt text: {metrics['images_with_alt']}")
-    print(f"Images without alt text: {metrics['images_without_alt']}")
+    print(f"Bilder: {metrics['image_count']}")
+    print(f"Bilder mit Alt-Text: {metrics['images_with_alt']}")
+    print(f"Bilder ohne Alt-Text: {metrics['images_without_alt']}")
     if metrics['canonical_url']:
-        print(f"Canonical URL: {metrics['canonical_url']}")
-    print(f"Internal links: {metrics['internal_links']}")
-    print(f"External links: {metrics['external_links']}")
+        print(f"Canonische URL: {metrics['canonical_url']}")
+    print(f"Interne Links: {metrics['internal_links']}")
+    print(f"Externe Links: {metrics['external_links']}")
 
 
 if __name__ == "__main__":
