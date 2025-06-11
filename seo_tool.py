@@ -1,10 +1,18 @@
 import argparse
 from urllib.parse import urlparse
 
-__version__ = "1.0.0"
+__version__ = "1.0.1"
 
-import requests
-from bs4 import BeautifulSoup
+try:
+    import requests
+    from bs4 import BeautifulSoup
+except ImportError as exc:  # pragma: no cover - exit if deps missing
+    missing = "requests" if "requests" in str(exc) else "beautifulsoup4"
+    print(
+        f"Fehlende Abhängigkeit: {missing}. Bitte mit 'pip install -r requirements.txt' installieren.",
+        flush=True,
+    )
+    raise SystemExit(1) from exc
 
 
 def fetch_html(url: str) -> str:

@@ -12,6 +12,10 @@ Installiere die Python-Abhängigkeiten:
 pip install -r requirements.txt
 ```
 
+Sollte beim Start der Fehlermeldung `ModuleNotFoundError: No module named 'bs4'`
+erscheinen, fehlen die Abhängigkeiten. In diesem Fall erneut das obige Kommando
+ausführen.
+
 ## Installation
 
 Das Werkzeug ist auf PyPI verfügbar und kann direkt installiert werden:
