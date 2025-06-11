@@ -1,0 +1,24 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "seo-tool"
+version = "1.0.0"
+description = "Ein einfaches Kommandozeilenwerkzeug zur Analyse grundlegender SEO-Metriken"
+readme = "README.md"
+requires-python = ">=3.11"
+license = {text = "MIT"}
+authors = [{name = "Noelmarketing", email = "noela808@googlemail.com"}]
+dependencies = [
+    "requests",
+    "beautifulsoup4",
+]
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+]
+
+[project.scripts]
+seo-tool = "seo_tool:main"

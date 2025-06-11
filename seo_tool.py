@@ -1,6 +1,8 @@
 import argparse
 from urllib.parse import urlparse
 
+__version__ = "1.0.0"
+
 import requests
 from bs4 import BeautifulSoup
 
@@ -74,6 +76,7 @@ def parse_seo_metrics(html: str, base_url: str | None = None) -> dict:
 def main() -> None:
     parser = argparse.ArgumentParser(description="Einfacher SEO-Analysator")
     parser.add_argument("url", help="URL, die analysiert werden soll")
+    parser.add_argument("--version", action="version", version=__version__)
     args = parser.parse_args()
 
     html = fetch_html(args.url)

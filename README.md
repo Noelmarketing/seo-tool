@@ -12,6 +12,20 @@ Installiere die Python-Abhängigkeiten:
 pip install -r requirements.txt
 ```
 
+## Installation
+
+Das Werkzeug ist auf PyPI verfügbar und kann direkt installiert werden:
+
+```bash
+pip install seo-tool
+```
+
+Nach der Installation steht der Befehl `seo-tool` systemweit zur Verfügung:
+
+```bash
+seo-tool https://example.com
+```
+
 ## Verwendung
 
 Starte das Werkzeug mit einer zu analysierenden URL:
@@ -49,3 +63,7 @@ pyinstaller --onefile --name seo_tool seo_tool.py
 
 Die erzeugte `seo_tool.exe` liegt im Ordner `dist`. Kopiere diese Datei auf
 einen Windows-Rechner und führe sie über die Eingabeaufforderung aus.
+
+## Versionshinweise
+
+Details zu veröffentlichten Versionen findest du im [Changelog](CHANGELOG.md).
