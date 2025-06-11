@@ -1,38 +1,51 @@
-# SEO Tool
+# SEO-Werkzeug
 
-This repository contains a simple command line utility to fetch a web page and
-report basic SEO metrics such as title, meta description, heading counts, image
-statistics and link information.
+Dieses Repository enthält ein einfaches Kommandozeilenprogramm, das eine
+Webseite abruft und grundlegende SEO-Metriken wie Titel, Meta-Description,
+Überschriftenanzahl, Bildstatistiken und Linkinformationen ausgibt.
 
-## Requirements
+## Voraussetzungen
 
-Install the Python dependencies:
+Installiere die Python-Abhängigkeiten:
 
 ```bash
 pip install -r requirements.txt
 ```
 
-## Usage
+## Verwendung
 
-Run the tool with a URL to analyze:
+Starte das Werkzeug mit einer zu analysierenden URL:
 
 ```bash
 python seo_tool.py https://example.com
 ```
 
-The tool reports the following metrics:
+Das Werkzeug gibt folgende Metriken aus:
 
-- Page title and meta description
-- Word count
-- Heading counts (`h1`-`h6`)
-- Image counts, including how many images lack `alt` text
-- Canonical URL if present
-- Number of internal and external links
+- Seitentitel und Meta-Description
+- Anzahl der Wörter
+- Überschriftenanzahl (`h1`-`h6`)
+- Anzahl der Bilder sowie wie viele Bilder kein `alt`-Attribut besitzen
+- Vorhandene Canonical-URL
+- Anzahl interner und externer Links
 
-## Running Tests
+## Tests ausführen
 
-Unit tests use `pytest`. To run them:
+Die Unit Tests verwenden `pytest`. Führe sie so aus:
 
 ```bash
 pytest
 ```
+
+## Erstellen einer Windows-Exe
+
+Um das Werkzeug als eigenständige `.exe` für Windows zu erstellen, verwende
+[PyInstaller](https://pyinstaller.org/). Installiere zuerst PyInstaller und führe dann aus:
+
+```bash
+pip install pyinstaller
+pyinstaller --onefile --name seo_tool seo_tool.py
+```
+
+Die erzeugte `seo_tool.exe` liegt im Ordner `dist`. Kopiere diese Datei auf
+einen Windows-Rechner und führe sie über die Eingabeaufforderung aus.
