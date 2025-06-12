@@ -1,5 +1,7 @@
 import argparse
 from urllib.parse import urlparse
+import tkinter as tk
+from tkinter import messagebox, scrolledtext, ttk
 
 __version__ = "1.0.0"
 
@@ -96,6 +98,56 @@ def main() -> None:
         print(f"Canonische URL: {metrics['canonical_url']}")
     print(f"Interne Links: {metrics['internal_links']}")
     print(f"Externe Links: {metrics['external_links']}")
+
+
+def gui_main() -> None:
+    """Startet eine einfache grafische Oberfläche für das SEO-Tool."""
+
+    def analyse() -> None:
+        url = url_entry.get().strip()
+        if not url:
+            messagebox.showwarning("Fehler", "Bitte eine URL eingeben.")
+            return
+        try:
+            html = fetch_html(url)
+            metrics = parse_seo_metrics(html, base_url=url)
+        except Exception as exc:  # pragma: no cover - GUI error handling
+            messagebox.showerror("Fehler", f"Fehler beim Abruf der URL: {exc}")
+            return
+
+        results.config(state="normal")
+        results.delete("1.0", tk.END)
+        results.insert(tk.END, f"Titel: {metrics['title']}\n")
+        results.insert(tk.END, f"Meta-Description: {metrics['meta_description']}\n")
+        results.insert(tk.END, f"Wörter insgesamt: {metrics['word_count']}\n")
+        results.insert(tk.END, "Überschriftenanzahl:\n")
+        for heading, count in metrics["heading_counts"].items():
+            if count:
+                results.insert(tk.END, f"  {heading}: {count}\n")
+        results.insert(tk.END, f"Bilder: {metrics['image_count']}\n")
+        results.insert(tk.END, f"Bilder mit Alt-Text: {metrics['images_with_alt']}\n")
+        results.insert(tk.END, f"Bilder ohne Alt-Text: {metrics['images_without_alt']}\n")
+        if metrics["canonical_url"]:
+            results.insert(tk.END, f"Canonische URL: {metrics['canonical_url']}\n")
+        results.insert(tk.END, f"Interne Links: {metrics['internal_links']}\n")
+        results.insert(tk.END, f"Externe Links: {metrics['external_links']}\n")
+        results.config(state="disabled")
+
+    root = tk.Tk()
+    root.title("SEO-Tool")
+
+    url_label = ttk.Label(root, text="URL:")
+    url_entry = ttk.Entry(root, width=50)
+    analyse_button = ttk.Button(root, text="Analysieren", command=analyse)
+    results = scrolledtext.ScrolledText(root, width=80, height=20, state="disabled")
+
+    url_label.grid(row=0, column=0, sticky="w", padx=5, pady=5)
+    url_entry.grid(row=0, column=1, sticky="we", padx=5, pady=5)
+    analyse_button.grid(row=0, column=2, padx=5, pady=5)
+    results.grid(row=1, column=0, columnspan=3, padx=5, pady=5)
+
+    root.grid_columnconfigure(1, weight=1)
+    root.mainloop()
 
 
 if __name__ == "__main__":

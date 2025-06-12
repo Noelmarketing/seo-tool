@@ -26,6 +26,13 @@ Nach der Installation steht der Befehl `seo-tool` systemweit zur Verfügung:
 seo-tool https://example.com
 ```
 
+Für eine einfache grafische Oberfläche installiere das Paket ebenfalls und
+rufe anschließend `seo-tool-gui` auf:
+
+```bash
+seo-tool-gui
+```
+
 ## Verwendung
 
 Starte das Werkzeug mit einer zu analysierenden URL:
