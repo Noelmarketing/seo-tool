@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "seo-tool"
-version = "1.0.0"
+version = "1.3.0"
 description = "Ein einfaches Kommandozeilenwerkzeug zur Analyse grundlegender SEO-Metriken"
 readme = "README.md"
 requires-python = ">=3.11"
@@ -13,6 +13,7 @@ authors = [{name = "Noelmarketing", email = "noela808@googlemail.com"}]
 dependencies = [
     "requests",
     "beautifulsoup4",
+    "textstat",
 ]
 classifiers = [
     "Programming Language :: Python :: 3",

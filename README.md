@@ -34,14 +34,31 @@ Starte das Werkzeug mit einer zu analysierenden URL:
 python seo_tool.py https://example.com
 ```
 
+Mit `--json` erhältst du die Ausgabe im JSON-Format:
+
+```bash
+python seo_tool.py https://example.com --json
+```
+
 Das Werkzeug gibt folgende Metriken aus:
 
 - Seitentitel und Meta-Description
 - Anzahl der Wörter
 - Überschriftenanzahl (`h1`-`h6`)
 - Anzahl der Bilder sowie wie viele Bilder kein `alt`-Attribut besitzen
+- Quote der Bilder mit `alt`-Text
 - Vorhandene Canonical-URL
 - Anzahl interner und externer Links
+- Vorhandenes Robots-Meta-Tag
+- Meta-Keywords
+- Open-Graph-Titel, -Beschreibung und -Bild
+- Sprache (`lang`-Attribut) und Zeichensatz der Seite
+- Flesch-Lesbarkeitsindex und Flesch-Kincaid-Stufe
+- Geschätzte Lesezeit
+- Verhältnis von Text zu HTML
+- Warnungen zur Überschriftenstruktur
+- Vorhandenes Viewport-Meta-Tag
+- Warnung bei mehreren `h1`-Überschriften
 
 ## Tests ausführen
 
